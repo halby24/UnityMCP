@@ -340,6 +340,12 @@ namespace UnityMCP.Editor.Settings
 
             GUILayout.Label("Connection Status", this.headerStyle);
 
+            // Try to get the server instance if we don't have it yet
+            if (this.mcpServer == null)
+            {
+                McpServiceManager.Instance.TryGetService<McpServer>(out this.mcpServer);
+            }
+
             if (this.mcpServer != null)
             {
                 var connected = this.mcpServer.IsConnected;

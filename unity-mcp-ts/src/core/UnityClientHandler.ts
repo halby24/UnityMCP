@@ -17,12 +17,13 @@ export function registerUnityClientTools(server: McpServer): void {
         {},
         async () => {
 
-            connection.clearClients();
-
-            connection.sendInitialBroadcast("listClients");
-
-            // Wait for the clients
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            // Don't clear existing clients - they are already connected via TCP
+            // Only send broadcast if no clients are connected
+            if (!connection.hasConnectedClients()) {
+                connection.sendInitialBroadcast("listClients");
+                // Wait for potential new clients
+                await new Promise(resolve => setTimeout(resolve, 3000));
+            }
 
             const clients = connection.getConnectedClients();
 
