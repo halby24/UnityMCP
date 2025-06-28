@@ -384,6 +384,8 @@ Environment variables for the TypeScript server:
 
 - `MCP_HOST`: Unity server host (default: 127.0.0.1)
 - `MCP_PORT`: Unity server port (default: 27182)
+- `MCP_FORCE_KILL`: Automatically kill processes using the port (default: false)
+  - Set to `true` or `1` to automatically terminate existing processes using the specified port before starting the server
 
 ## 🔍 Troubleshooting
 
@@ -393,6 +395,7 @@ Environment variables for the TypeScript server:
    - Check firewall settings on Unity side
    - Verify port number is correctly configured
    - Check if another process is using the same port
+   - For port conflicts, set environment variable `MCP_FORCE_KILL=true` to automatically terminate existing processes
 
 2. **Handlers Not Registering**
    - Verify handler classes implement the correct interface
